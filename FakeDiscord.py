@@ -1,7 +1,5 @@
-from lib import window, titlebar, DiscordImageSave
-import pygame, pyaudio, numpy, win32gui, win32con, pygetwindow, win32ui
-
-pygame.init()
+from lib import DiscordImageSave
+import win32ui, win32con
 filename = 'FakeDiscord'
 def inputcheck(x):
     if x.upper() == 'true'.upper():
@@ -31,6 +29,9 @@ except:
         createfile.write('\nDiscord.Avatar.2.Active = ')
     win32ui.MessageBox(filename+".txt not found or option is incorrect", "FakeModernUIApplication_Error", win32con.MB_ICONERROR)
     exit()
+from lib import window, titlebar
+import pygame, pyaudio, numpy, win32gui, pygetwindow
+pygame.init()
 pygame.display.set_caption(wintitle)
 FakeDiscord = pygame.display.set_mode(
     (
