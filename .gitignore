@@ -5,3 +5,5 @@ FakeDiscord.txt
 build
 dist
 *.spec
+.gitignore
+.git/info/exclude
