@@ -1,3 +1,4 @@
+#------------FakeDiscord.txt check----------------------------------
 from lib import DiscordImageSave
 import win32ui, win32con
 filename = 'FakeDiscord'
@@ -29,6 +30,7 @@ except:
         createfile.write('\nDiscord.Avatar.2.Active = ')
     win32ui.MessageBox(filename+".txt not found or option is incorrect", "FakeModernUIApplication_Error", win32con.MB_ICONERROR)
     exit()
+#----------------------------------------------------------------
 from lib import window, titlebar
 import pygame, pyaudio, numpy, win32gui, pygetwindow
 pygame.init()
@@ -45,7 +47,7 @@ pygame.display.set_icon(
 try:
     mic = pyaudio.PyAudio().open(format=pyaudio.paInt16,channels=1,rate=44100,input=True,frames_per_buffer=2048, input_device_index=1)
 except:
-    print('No microphone detected')
+    win32ui.MessageBox('There is no microphone', "FakeModernUIApplication_Error", win32con.MB_ICONINFORMATION|win32con.MB_OK)
 core = window.__window__(wintitle, FakeDiscord)
 if insert:
     Discord = pygetwindow.getWindowsWithTitle(Distitle)[0]
@@ -57,21 +59,15 @@ if insert:
     )
 run = True
 while run:
-    core.edge.check(core)
-    x, y, w, h = core.screen.topleft[0], core.screen.topleft[1], core.screen.size[0], core.screen.size[1]
     #------------modern ui-------------------
-    for event in pygame.event.get():
-        run = titlebar.process(core, FakeDiscord)
-        if run == 12:
-            run = True
-            break
-        if event.type == pygame.quit or not run:
-            run = False
-            break
-    if not run: break        
+    if win32gui.GetWindowText(win32gui.GetForegroundWindow()) == core.title:
+        core.edge.check(core.screen)
+    run = titlebar.process(core, FakeDiscord)
+    run = True if run == 12 or run else False
+    if pygame.event.peek(pygame.QUIT) == True or not run:
+        break
     #----------------------------------------
     #---------------fake avatar--------------
-
         #---------------------- mic check -----------------------
     try:
         noise = int(numpy.average(numpy.abs(numpy.fromstring(mic.read(2048),dtype=numpy.int16))) // 10)
@@ -111,11 +107,14 @@ while run:
         )
     )
     #----------------------------------------
+    #-------------------window refresh and change------------------------
+    x, y, w, h = core.screen.topleft[0], core.screen.topleft[1], core.screen.size[0], core.screen.size[1]
     window.refresh(
         insert, core, 
         Distitle, FakeDiscord, 
         x, y, w, h
     )
+    #------------------------------------------------------------------
 if insert:
     win32gui.SetWindowPos(
         win32gui.FindWindow(None, Distitle),
