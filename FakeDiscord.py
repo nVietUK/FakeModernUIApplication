@@ -1,5 +1,5 @@
 from lib import window, titlebar, DiscordImageSave
-import pygame, pyaudio, numpy, win32gui, win32con, pygetwindow
+import pygame, pyaudio, numpy, win32gui, win32con, pygetwindow, win32ui
 
 pygame.init()
 filename = 'FakeDiscord'
@@ -18,14 +18,18 @@ try:
     DiscordImage.ava2.noneactive = settingfile.readline().split(' ', 2)[2].rstrip("\n")
     DiscordImage.ava2.active     = settingfile.readline().split(' ', 2)[2].rstrip("\n")
 except:
-    createfile = open(filename+'.txt', 'w')
-    createfile.write('insert = ')
-    createfile.write('\nRealDiscord.title = ')
-    createfile.write('\nFakeDiscord.title =')
-    createfile.write('\nDiscord.Avatar.1.NoneActive = ')
-    createfile.write('\nDiscord.Avatar.1.Active = ')
-    createfile.write('\nDiscord.Avatar.2.NoneActive = ')
-    createfile.write('\nDiscord.Avatar.2.Active = ')
+    try:
+        open(filename+'.txt', 'r',  encoding="utf-8")
+    except:
+        createfile = open(filename+'.txt', 'w')
+        createfile.write('insert = ')
+        createfile.write('\nRealDiscord.title = ')
+        createfile.write('\nFakeDiscord.title =')
+        createfile.write('\nDiscord.Avatar.1.NoneActive = ')
+        createfile.write('\nDiscord.Avatar.1.Active = ')
+        createfile.write('\nDiscord.Avatar.2.NoneActive = ')
+        createfile.write('\nDiscord.Avatar.2.Active = ')
+    win32ui.MessageBox(filename+".txt not found or option is incorrect", "FakeModernUIApplication_Error", win32con.MB_ICONERROR)
     exit()
 pygame.display.set_caption(wintitle)
 FakeDiscord = pygame.display.set_mode(
