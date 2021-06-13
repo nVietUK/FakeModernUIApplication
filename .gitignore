@@ -6,4 +6,5 @@ build
 dist
 *.spec
 .gitignore
+.gitattributes
 .git/info/exclude
