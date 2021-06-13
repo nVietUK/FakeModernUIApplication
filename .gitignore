@@ -2,3 +2,6 @@ __pycache__
 .vscode
 test.py
 FakeDiscord.txt
+build
+dist
+*.spec

@@ -39,6 +39,11 @@ FakeDiscord = pygame.display.set_mode(
     ),
     pygame.RESIZABLE|pygame.NOFRAME
 )
+pygame.display.set_icon(
+    pygame.image.load(
+        "./Image/DiscordIcon/app.ico"
+        )
+    )
 try:
     mic = pyaudio.PyAudio().open(format=pyaudio.paInt16,channels=1,rate=44100,input=True,frames_per_buffer=2048, input_device_index=1)
 except:
