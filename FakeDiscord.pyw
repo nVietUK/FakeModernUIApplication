@@ -34,10 +34,7 @@ import pygame, pyaudio, numpy, win32gui, pygetwindow
 pygame.init()
 pygame.display.set_caption(wintitle)
 FakeDiscord = pygame.display.set_mode(
-    (
-        530,
-        386 
-    ),
+    (530, 386),
     pygame.RESIZABLE|pygame.NOFRAME
 )
 pygame.display.set_icon(
@@ -60,37 +57,19 @@ if insert:
     )
 run = True
 while run:
-    if insert:
-        x, y, w, h = core.screen.topleft[0], core.screen.topleft[1], core.screen.size[0], core.screen.size[1]
-        win32gui.SetWindowPos(
-            core.win32, win32con.HWND_TOPMOST, 
-            x, y, w, h,
-            pygame.RESIZABLE|pygame.NOFRAME
-        )
-        win32gui.SetWindowPos(
-            win32gui.FindWindow(None, Distitle),
-            win32con.HWND_NOTOPMOST, 
-            x+ 25, y+25, w - 50, h- 50,
-            pygame.RESIZABLE|pygame.NOFRAME
-        )
-    #-------------pygame screen sync window screen------------------
-    FakeDiscord = pygame.display.set_mode(
-        core.screen.size,
-        pygame.RESIZABLE|pygame.NOFRAME
-    )
-    #---------------------------------------------------------------
-
-    #------------modern ui-------------------
     core.edge.check(core)
+    x, y, w, h = core.screen.topleft[0], core.screen.topleft[1], core.screen.size[0], core.screen.size[1]
+    #------------modern ui-------------------
     for event in pygame.event.get():
         run = titlebar.process(core, FakeDiscord)
+        if run == 12:
+            run = True
+            break
         if event.type == pygame.quit or not run:
             run = False
             break
-    if not run: break
-        
+    if not run: break        
     #----------------------------------------
-
     #---------------fake avatar--------------
 
         #---------------------- mic check -----------------------
@@ -119,7 +98,6 @@ while run:
                 ava_height // 2
             )
         )
-
     )
 
     FakeDiscord.blit(
@@ -133,8 +111,11 @@ while run:
         )
     )
     #----------------------------------------
-
-    pygame.display.update()
+    window.refresh(
+        insert, core, 
+        Distitle, FakeDiscord, 
+        x, y, w, h
+    )
 if insert:
     win32gui.SetWindowPos(
         win32gui.FindWindow(None, Distitle),
