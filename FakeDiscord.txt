@@ -1,7 +1,0 @@
-insert = true
-RealDiscord.title = Discord
-FakeDiscord.title = Discord (fake)
-Discord.Avatar.1.NoneActive = C:\Users\nVietUK\Desktop\FakeDiscord\image\Avatar\macosx.png
-Discord.Avatar.1.Active = C:\Users\nVietUK\Desktop\FakeDiscord\image\Avatar\macos.png
-Discord.Avatar.2.NoneActive = C:\Users\nVietUK\Desktop\FakeDiscord\image\Avatar\windowsx.png
-Discord.Avatar.2.Active = C:\Users\nVietUK\Desktop\FakeDiscord\image\Avatar\windows.png
