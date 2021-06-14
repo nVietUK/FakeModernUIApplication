@@ -1,6 +1,6 @@
 #------------FakeDiscord.txt check----------------------------------
-from lib import DiscordImageSave
-import win32ui, win32con, os
+from lib import DiscordImageSave, WindowsBox
+import os, sys
 filename = 'FakeDiscord'
 def inputcheck(x):
     if x.upper() == 'true'.upper():
@@ -18,7 +18,8 @@ try:
     DiscordImage.ava2.active     = settingfile.readline().split(' ', 2)[2].rstrip("\n")
 except:
     try:
-        open(filename+'.txt', 'r',  encoding="utf-8")
+        settingfile.close()
+        WindowsBox.info(filename+ '.txt should be checked or deleted', 'File Error')
     except:
         createfile = open(filename+'.txt', 'w')
         createfile.write('insert = ')
@@ -28,13 +29,15 @@ except:
         createfile.write('\nDiscord.Avatar.1.Active = ')
         createfile.write('\nDiscord.Avatar.2.NoneActive = ')
         createfile.write('\nDiscord.Avatar.2.Active = ')
-    win32ui.MessageBox(filename+".txt not found or option is incorrect", "FakeModernUIApplication_Error", win32con.MB_ICONERROR)
-    exit()
+        WindowsBox.error(filename+".txt not found", "FakeModernUIApplication_Error")
+        createfile.close()
+    os.system('notepad.exe '+ os.getcwd()+'/'+filename+'.txt')
+    sys.exit()
 #----------------------------------------------------------------
 from lib import window, titlebar, FileCheck
-import pygame, pyaudio, numpy, win32gui, pygetwindow
+import pygame, pyaudio, numpy, win32gui, pygetwindow, win32ui, win32con
 #------------- file check -----------------------------------
-FileCheck.check('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.git', os.getcwd())
+FileCheck.check('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
 #------------------------------------------------------------
 pygame.init()
 pygame.display.set_caption(wintitle)
