@@ -64,7 +64,7 @@ while run:
         core.edge.check(core.screen)
     run = titlebar.process(core, FakeDiscord)
     run = True if run == 12 or run else False
-    if pygame.event.peek(pygame.QUIT) == True or not run:
+    if not run or pygame.event.peek(pygame.QUIT) == True:
         break
     #----------------------------------------
     #---------------fake avatar--------------
