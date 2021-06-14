@@ -75,26 +75,26 @@ class button():
         self.close = __button__(
             measure.title_button, 0, 
             (235, 64, 73),
-            pygame.image.load('/image/TitleBar/close.png'),
-            pygame.image.load('/image/TitleBar/closex.png'),
+            pygame.image.load('./image/TitleBar/close.png'),
+            pygame.image.load('./image/TitleBar/closex.png'),
             1
         )  
         self.maximize = __button__(
             measure.title_button, 0,
             (52, 55, 60),
-            pygame.image.load('/image/TitleBar/maximize.png'), '',
+            pygame.image.load('./image/TitleBar/maximize.png'), '',
             2
         )
         self.minimize = __button__(
             measure.title_button, 0,
             (52, 55, 60),
-            pygame.image.load('/image/TitleBar/minimize.png'), '',
+            pygame.image.load('./image/TitleBar/minimize.png'), '',
             3
         )
         self.Discord = __button__(
             0, 0, 
             (0, 0, 0), 
-            pygame.image.load('/image/TitleBar/Discord.png')
+            pygame.image.load('./image/TitleBar/Discord.png')
         )
         #--------------------------------------
 class edge:

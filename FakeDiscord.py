@@ -1,6 +1,6 @@
 #------------FakeDiscord.txt check----------------------------------
 from lib import DiscordImageSave
-import win32ui, win32con
+import win32ui, win32con, os
 filename = 'FakeDiscord'
 def inputcheck(x):
     if x.upper() == 'true'.upper():
@@ -41,7 +41,7 @@ FakeDiscord = pygame.display.set_mode(
 )
 pygame.display.set_icon(
     pygame.image.load(
-        "./Image/DiscordIcon/app.ico"
+        os.getcwd() + "/image/DiscordIcon/app.ico"
         )
     )
 try:
