@@ -5,7 +5,7 @@ def check(requestfile, cwd):
         requestfile, 
         filename= cwd + "/Request.file"
     )
-    File = open(filename)
+    File = open(filename, 'r')
     run = True
     while run:
         job = File.readline().split(' ').rstrip("\n")
