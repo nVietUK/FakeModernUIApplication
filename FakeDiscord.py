@@ -31,8 +31,11 @@ except:
     win32ui.MessageBox(filename+".txt not found or option is incorrect", "FakeModernUIApplication_Error", win32con.MB_ICONERROR)
     exit()
 #----------------------------------------------------------------
-from lib import window, titlebar
+from lib import window, titlebar, FileCheck
 import pygame, pyaudio, numpy, win32gui, pygetwindow
+#------------- file check -----------------------------------
+FileCheck.check('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.git', os.getcwd())
+#------------------------------------------------------------
 pygame.init()
 pygame.display.set_caption(wintitle)
 FakeDiscord = pygame.display.set_mode(
