@@ -1,4 +1,5 @@
 # FakeModernUIApplication.exe
+![alt text](./image/2021-06-15-15-48-02.gif)
 Một phầm mềm máy tính viết dựa trên ngôn ngữ lập trình Python nhằm che lại cửa sổ của hệ điều hành Windows 10
 
 # Hướng dẫn sử dụng
