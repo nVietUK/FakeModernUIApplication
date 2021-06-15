@@ -1,7 +1,16 @@
+from sys import path
+import sys
 from lib import WindowsBox
-import urllib.request, os
+import urllib.request, os, sys
 
-def check(requestfile, cwd):
+def DirCreate(cwd, path):
+    run = os.path.join(cwd, path.split('/')[0])
+    try: os.mkdir(run)
+    except: pass
+    if path != path.replace(path.split('/')[0]+'/', ''):
+        DirCreate(run, path.replace(path.split('/')[0]+'/', ''))
+    return None
+def resource(requestfile, cwd):
     try:
         filename, headers = urllib.request.urlretrieve(
             requestfile, 
@@ -14,6 +23,13 @@ def check(requestfile, cwd):
     while run:
         job = File.readline().split(' ')
         if job[0] == '': return
-        path = cwd + '\\' + job[0].rstrip("\n")
-        os.path.join()
-        if not os.path.isfile(path): filename, headers = urllib.request.urlretrieve(job[1], filename= path)
+        file = job[0].split('/')[len(job[0].split('/'))- 1]
+        path = job[0].replace('/'+file, '')
+        DirCreate(cwd, path)
+        if not os.path.isfile(cwd+'/'+path+'/'+file): urllib.request.urlretrieve(job[1], filename= path+'/'+file)
+def existent(path):
+    if os.path.isfile(path):
+        return path
+    else:
+        WindowsBox.error(path+" not found", 'File Error')
+        return ''

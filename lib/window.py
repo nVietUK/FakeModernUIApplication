@@ -9,10 +9,8 @@ class __button__:
         self.color = color
         self.p = P
     def first(self, input):
-        try:
-            x = input(self.p)
-        except:
-            x = input
+        try: x = input(self.p)
+        except: x = input
         return x
     def check(self, screen) -> bool:       
         x = self.first(self.x)
@@ -36,22 +34,14 @@ class __edge__:
         self.x, self.y, self.w, self.h = x, y, w, h
         self.change = False
     def check(self) -> bool:
-        try:
-            w = self.w()
-        except:
-            w = self.w
-        try:
-            h = self.h()
-        except:
-            h = self.h  
-        try:
-            x = self.x() -2
-        except:
-            x = self.x
-        try:
-            y = self.y() - 2
-        except:
-            y = self.y  
+        try: w = self.w()
+        except: w = self.w
+        try: h = self.h()
+        except: h = self.h  
+        try: x = self.x() -2
+        except: x = self.x
+        try: y = self.y() - 2
+        except: y = self.y  
         if x <= measure.mouse_pos()[0] and measure.mouse_pos()[0] <= x + w:
             if y <= measure.mouse_pos()[1] and measure.mouse_pos()[1] <= y + h:
                 return True

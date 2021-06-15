@@ -1,5 +1,5 @@
 #------------FakeDiscord.txt check----------------------------------
-from lib import DiscordImageSave, WindowsBox
+from lib import DiscordImageSave, WindowsBox, FileCheck
 import os, sys
 filename = 'FakeDiscord'
 def inputcheck(x):
@@ -12,10 +12,10 @@ try:
     Distitle = settingfile.readline().split(' ', 2)[2].rstrip("\n")
     wintitle = settingfile.readline().split(' ', 2)[2].rstrip("\n")
     DiscordImage = DiscordImageSave.__ava__()
-    DiscordImage.ava1.noneactive = settingfile.readline().split(' ', 2)[2].rstrip("\n")
-    DiscordImage.ava1.active     = settingfile.readline().split(' ', 2)[2].rstrip("\n")
-    DiscordImage.ava2.noneactive = settingfile.readline().split(' ', 2)[2].rstrip("\n")
-    DiscordImage.ava2.active     = settingfile.readline().split(' ', 2)[2].rstrip("\n")
+    DiscordImage.ava1.noneactive = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
+    DiscordImage.ava1.active     = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
+    DiscordImage.ava2.noneactive = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
+    DiscordImage.ava2.active     = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
 except:
     try:
         settingfile.close()
@@ -34,10 +34,10 @@ except:
     os.system('notepad.exe '+ os.getcwd()+'/'+filename+'.txt')
     sys.exit()
 #----------------------------------------------------------------
-from lib import window, titlebar, FileCheck
+from lib import window, titlebar
 import pygame, pyaudio, numpy, win32gui, pygetwindow, win32ui, win32con
 #------------- file check -----------------------------------
-FileCheck.check('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
+FileCheck.resource('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
 #------------------------------------------------------------
 pygame.init()
 pygame.display.set_caption(wintitle)
