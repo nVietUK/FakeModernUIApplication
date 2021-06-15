@@ -4,8 +4,9 @@ Một phầm mềm máy tính viết dựa trên ngôn ngữ lập trình Python
 # Hướng dẫn sử dụng
 Tải phần mềm tại đường link
 ``` 
-
+https://github.com/nVietUK/FakeModernUIApplication/releases/download/v0.1/FakeDiscord.zip
 ```
+Giải nén file .zip
 Mở phần mềm lên lần đầu và nhấn ok
 Mở FakeDiscord.txt và chỉnh sửa theo ý muốn của bản thân
 Tiếp tục mở phần mềm và sử dụng
