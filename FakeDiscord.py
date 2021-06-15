@@ -26,7 +26,7 @@ try:
         cwd, 'image/Avatar/windowsx.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/windowsx.png'
     )
     DiscordImage.ava2.active     = FileCheck.existent(
-        settingfile.readline().split(' ', 2)[2].rstri("\n", ''),
+        settingfile.readline().split(' ', 2)[2].replace("\n", ''),
         cwd, 'image/Avatar/windows.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/windows.png'
     )
 except:

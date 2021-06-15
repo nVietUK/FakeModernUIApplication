@@ -1,5 +1,4 @@
 from sys import path
-import sys
 from lib import WindowsBox
 import urllib.request, os, sys
 
