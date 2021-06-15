@@ -5,7 +5,7 @@ def check(requestfile, cwd):
     try:
         filename, headers = urllib.request.urlretrieve(
             requestfile, 
-            filename= cwd + "/Request.file1"
+            filename= cwd + "/Request.file"
         )
     except:
         WindowsBox.error('No internet connection', 'File Download Error')
@@ -14,5 +14,6 @@ def check(requestfile, cwd):
     while run:
         job = File.readline().split(' ')
         if job[0] == '': return
-        path = cwd + '/' + job[0]
-        if not os.path.isfile(path): urllib.request.urlretrieve(job[1], path)
+        path = cwd + '\\' + job[0].rstrip("\n")
+        os.path.join()
+        if not os.path.isfile(path): filename, headers = urllib.request.urlretrieve(job[1], filename= path)
