@@ -1,3 +1,4 @@
+from numpy import mod
 from lib import measure
 import pygame, pygetwindow, win32api, win32gui, pyautogui, os, win32con
 
@@ -193,20 +194,36 @@ class __window__:
         )
         self.title = wintitle
         self.win32 = win32gui.FindWindow(None, wintitle)
-def refresh(insert, core, Distitle, FakeDiscord, x, y, w, h):
+def screen_refresh(x, y, w, h, Distitle, mode):
+    win32gui.SetWindowPos(
+        win32gui.FindWindow(None, Distitle), mode, 
+        x, y, w, h,
+        pygame.RESIZABLE|pygame.NOFRAME
+    )
+def window_refresh(x, y, w, h, window, mode):
+    win32gui.SetWindowPos(
+        window, mode, 
+        x, y, w, h,
+        pygame.RESIZABLE|pygame.NOFRAME
+    )
+def refresh(insert, core, Distitle, x, y, w, h):
+    global FakeDiscord
     pygame.display.update()
     if insert:
-        win32gui.SetWindowPos(
-            core.win32, win32con.HWND_TOPMOST, 
-            x, y, w, h,
-            pygame.RESIZABLE|pygame.NOFRAME
-        )
-        win32gui.SetWindowPos(
-            win32gui.FindWindow(None, Distitle),
-            win32con.HWND_NOTOPMOST, 
-            x, y, w, h,
-            pygame.RESIZABLE|pygame.NOFRAME
-        )
+        window_refresh(x, y, w, h, core.win32, win32con.HWND_TOPMOST)
+        screen_refresh(x, y, w, h, Distitle, win32con.HWND_NOTOPMOST)
+    FakeDiscord = pygame.display.set_mode(
+        (
+            w, h
+        ),
+        pygame.RESIZABLE|pygame.NOFRAME
+    )
+def hide(insert, core, Distitle, x, y, w, h):
+    global FakeDiscord
+    pygame.display.update()
+    if insert:
+        window_refresh(x, y, w, h, core.win32, win32con.HWND_NOTOPMOST)
+        screen_refresh(x, y, w, h, Distitle, win32con.HWND_TOPMOST)
     FakeDiscord = pygame.display.set_mode(
         (
             w, h

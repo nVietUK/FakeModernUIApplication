@@ -9,7 +9,8 @@ def inputcheck(x):
 cwd = os.getcwd()
 try:
     settingfile = open(filename+'.txt', 'r',  encoding="utf-8")
-    insert = inputcheck(settingfile.readline().split(' ', 2)[2].replace("\n", ''))
+    insert   = inputcheck(settingfile.readline().split(' ', 2)[2].replace("\n", ''))
+    hotkey   = settingfile.readline().split(' ', 2)[2].replace("\n", '')
     Distitle = settingfile.readline().split(' ', 2)[2].replace("\n", '')
     wintitle = settingfile.readline().split(' ', 2)[2].replace("\n", '')
     DiscordImage = DiscordImageSave.__ava__()
@@ -36,6 +37,7 @@ except:
     except:
         createfile = open(filename+'.txt', 'w')
         createfile.write('insert = ')
+        createfile.write('\nhotkey = ')
         createfile.write('\nRealDiscord.title = ')
         createfile.write('\nFakeDiscord.title =')
         createfile.write('\nDiscord.Avatar.1.NoneActive = ')
@@ -48,10 +50,17 @@ except:
     sys.exit()
 #----------------------------------------------------------------
 from lib import window, titlebar
-import pygame, pyaudio, numpy, win32gui, pygetwindow, win32ui, win32con
+import pygame, pyaudio, numpy, win32gui, pygetwindow, win32ui, win32con, keyboard
 #------------- file check -----------------------------------
 FileCheck.resource('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
 #------------------------------------------------------------
+#------------------ hide window------------------------------
+hide = False
+def hidewindow():
+    global hide
+    hide = not hide
+keyboard.add_hotkey(hotkey, hidewindow)
+#-------------------------------------------------------------
 pygame.init()
 pygame.display.set_caption(wintitle)
 FakeDiscord = pygame.display.set_mode(
@@ -132,12 +141,18 @@ while run:
     #----------------------------------------
     #-------------------window refresh and change------------------------
     x, y, w, h = core.screen.topleft[0], core.screen.topleft[1], core.screen.size[0], core.screen.size[1]
-    window.refresh(
-        insert, core, 
-        Distitle, FakeDiscord, 
-        x, y, w, h
-    )
+    if not hide:
+        window.refresh(
+            insert, core, Distitle, 
+            x, y, w, h
+        )
+    if hide:
+        window.hide(
+            insert, core, Distitle,
+            x, y, w, h
+        )
     #------------------------------------------------------------------
+keyboard.wait()
 if insert:
     win32gui.SetWindowPos(
         win32gui.FindWindow(None, Distitle),
