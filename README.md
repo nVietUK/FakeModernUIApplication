@@ -28,7 +28,7 @@ https://github.com/nVietUK/FakeModernUIApplication/releases/download/v0.1.1/Fake
     * bắt buộc: không trùng với giá trị của RealDiscord.title
     * đặt tên cho cửa sổ giả
 * Discord.Avatar
-    * giá trị: vị trí file ảnh (vd: C:\icon.pnd, ...)
+    * giá trị: vị trí file ảnh (vd: C:\icon.png, ...)
     * NoneActive: khi không có âm thanh từ microphone
     * Active: có âm thanh từ microphone
 # Điều khoản sử dụng
