@@ -10,6 +10,10 @@ def DirCreate(cwd, path):
     if path != path.replace(path.split('/')[0]+'/', ''):
         DirCreate(run, path.replace(path.split('/')[0]+'/', ''))
     return None
+def download(file, cwd, path, link):
+    DirCreate(cwd, path)
+    if not os.path.isfile(cwd+'/'+path+'/'+file): urllib.request.urlretrieve(link, filename= path+'/'+file)
+    return cwd+'/'+path+'/'+file
 def resource(requestfile, cwd):
     try:
         filename, headers = urllib.request.urlretrieve(
@@ -25,11 +29,15 @@ def resource(requestfile, cwd):
         if job[0] == '': return
         file = job[0].split('/')[len(job[0].split('/'))- 1]
         path = job[0].replace('/'+file, '')
-        DirCreate(cwd, path)
-        if not os.path.isfile(cwd+'/'+path+'/'+file): urllib.request.urlretrieve(job[1], filename= path+'/'+file)
-def existent(path):
+        download(file, cwd, path, job[1])
+def existent(path, cwd, resource):
     if os.path.isfile(path):
         return path
     else:
         WindowsBox.error(path+" not found", 'File Error')
-        return ''
+        return download(
+            resource.split(' ')[0].split('/')[len(resource.split(' ')[0].split('/'))- 1], 
+            cwd, 
+            resource.split(' ')[0].replace('/'+resource.split(' ')[0].split('/')[len(resource.split(' ')[0].split('/'))- 1], ''), 
+            resource.split(' ')[1]
+        )

@@ -6,16 +6,29 @@ def inputcheck(x):
     if x.upper() == 'true'.upper():
         return True
     return False
+cwd = os.getcwd()
 try:
     settingfile = open(filename+'.txt', 'r',  encoding="utf-8")
-    insert = inputcheck(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
-    Distitle = settingfile.readline().split(' ', 2)[2].rstrip("\n")
-    wintitle = settingfile.readline().split(' ', 2)[2].rstrip("\n")
+    insert = inputcheck(settingfile.readline().split(' ', 2)[2].replace("\n", ''))
+    Distitle = settingfile.readline().split(' ', 2)[2].replace("\n", '')
+    wintitle = settingfile.readline().split(' ', 2)[2].replace("\n", '')
     DiscordImage = DiscordImageSave.__ava__()
-    DiscordImage.ava1.noneactive = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
-    DiscordImage.ava1.active     = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
-    DiscordImage.ava2.noneactive = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
-    DiscordImage.ava2.active     = FileCheck.existent(settingfile.readline().split(' ', 2)[2].rstrip("\n"))
+    DiscordImage.ava1.noneactive = FileCheck.existent(
+        settingfile.readline().split(' ', 2)[2].replace("\n", ''), 
+        cwd, 'image/Avatar/macosx.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/macosx.png'
+    )
+    DiscordImage.ava1.active     = FileCheck.existent(
+        settingfile.readline().split(' ', 2)[2].replace("\n", ''),
+        cwd, 'image/Avatar/macos.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/macos.png'
+    )
+    DiscordImage.ava2.noneactive = FileCheck.existent(
+        settingfile.readline().split(' ', 2)[2].replace("\n", ''),
+        cwd, 'image/Avatar/windowsx.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/windowsx.png'
+    )
+    DiscordImage.ava2.active     = FileCheck.existent(
+        settingfile.readline().split(' ', 2)[2].rstri("\n", ''),
+        cwd, 'image/Avatar/windows.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/windows.png'
+    )
 except:
     try:
         settingfile.close()
