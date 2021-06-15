@@ -18,3 +18,6 @@ https://github.com/nVietUK/FakeModernUIApplication/releases/download/v0.1/FakeDi
 ```bash
 vietuk.nguyen.git@icloud.com
 ```
+
+# Mục đích
+đang dịch nên ở nhà chán quáaaaaaaaaaaaaaaaaaaaaaaaaa nên viết chương trình cho đỡ chán 

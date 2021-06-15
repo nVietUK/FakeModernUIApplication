@@ -76,6 +76,10 @@ if insert:
         x, y, w, h,
         pygame.RESIZABLE|pygame.NOFRAME
     )
+    FakeDiscord = pygame.display.set_mode(
+        (w, h),
+        pygame.RESIZABLE|pygame.NOFRAME
+    )
 run = True
 while run:
     #------------modern ui-------------------
