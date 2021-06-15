@@ -6,7 +6,7 @@ Một phầm mềm máy tính viết dựa trên ngôn ngữ lập trình Python
 # Hướng dẫn sử dụng
 * Tải phần mềm tại đường link
 ``` 
-https://github.com/nVietUK/FakeModernUIApplication/releases/download/v0.1/FakeDiscord.zip
+https://github.com/nVietUK/FakeModernUIApplication/releases/download/v0.1.1/FakeDiscord.zip
 ```
 * Giải nén file .zip
 * Mở phần mềm lên lần đầu và nhấn ok
