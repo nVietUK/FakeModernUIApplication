@@ -1,4 +1,6 @@
 from sys import path
+
+import multitasking
 from lib import WindowsBox
 import urllib.request, os, sys
 
@@ -9,10 +11,12 @@ def DirCreate(cwd, path):
     if path != path.replace(path.split('/')[0]+'/', ''):
         DirCreate(run, path.replace(path.split('/')[0]+'/', ''))
     return None
+@multitasking.task
 def download(file, cwd, path, link):
     DirCreate(cwd, path)
     if not os.path.isfile(cwd+'/'+path+'/'+file): urllib.request.urlretrieve(link, filename= path+'/'+file)
     return cwd+'/'+path+'/'+file
+@multitasking.task
 def resource(requestfile, cwd):
     try:
         filename, headers = urllib.request.urlretrieve(
