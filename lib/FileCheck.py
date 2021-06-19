@@ -2,7 +2,7 @@ from sys import path
 
 import multitasking
 from lib import WindowsBox
-import urllib.request, os, sys
+import urllib.request, os
 
 def DirCreate(cwd, path):
     run = os.path.join(cwd, path.split('/')[0])

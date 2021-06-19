@@ -1,5 +1,5 @@
 #------------WindowUI.txt check----------------------------------
-from lib import DiscordImageSave, WindowsBox, FileCheck
+from lib import DiscordImageSave, WindowsBox
 import os, sys
 filename = 'FakeDiscord'
 def inputcheck(x):
@@ -29,14 +29,13 @@ except:
     os.system('notepad.exe '+ os.getcwd()+'/'+filename+'.txt')
     sys.exit()
 #----------------------------------------------------------------
-from lib import window
+from lib import window, FileCheck
 import pygame, pygetwindow, keyboard
 #------------- file check -----------------------------------
 FileCheck.resource('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
 try:
     import MyUI 
 except:
-    from lib import FileCheck
     WindowsBox.error('MyUI.py not found', 'Program Error')
     FileCheck.existent(
         settingfile.readline().split(' ', 2)[2].replace("\n", ''), 
