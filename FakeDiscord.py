@@ -40,7 +40,7 @@ except:
     WindowsBox.error('MyUI.py not found', 'Program Error')
     FileCheck.existent(
         settingfile.readline().split(' ', 2)[2].replace("\n", ''), 
-        cwd, 'image/Avatar/macosx.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/macosx.png'
+        cwd, 'MyUI.py https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/MyUI.py'
     )
     sys.exit()
 #------------------------------------------------------------
