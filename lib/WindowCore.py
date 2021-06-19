@@ -8,6 +8,7 @@ class __button__:
         self.imagex = imagex
         self.Surface = Surface
         self.p = P
+        self.drawI = self.image
     def first(self, input):
         try: x = input(self.p)
         except: x = input
@@ -16,15 +17,14 @@ class __button__:
         x = self.first(self.x)
         if x < measure.mouse_pos()[0] and measure.mouse_pos()[0] < x + self.w:
             if self.y < measure.mouse_pos()[1] and measure.mouse_pos()[1] < self.y + self.h:
-                self.Surface.blit(self.imagex, (x, self.y))
+                self.drawI = self.imagex
                 return True
+        self.drawI = self.image
         return False
-
     def draw(self):
         x = self.first(self.x)
         pygame.draw.rect(self.Surface, (47, 49, 54), ((x, self.y), (self.w, self.h)))   
-        if self.image != '':
-            self.Surface.blit(self.image, (x, self.y))
+        self.Surface.blit(self.drawI, (x, self.y))
 class __edge__:
     def __init__(self, x, y, w, h):
         self.x, self.y, self.w, self.h = x, y, w, h

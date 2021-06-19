@@ -1,9 +1,7 @@
-import sys
+from lib import measure, WindowCore, WindowsBox, titlebar
+import pygetwindow, sys, threading, win32gui, pygame
 
-import multitasking
-from lib import measure, WindowCore, WindowsBox
-import pygame, pygetwindow, win32gui, win32con
-class __window__:
+class window:
     def __init__(self, wintitle, Surface) -> None:
         self.button = WindowCore.button(Surface)
         self.edge = WindowCore.edge(
@@ -21,30 +19,29 @@ def find(name):
     except:
         WindowsBox.error('"'+ name+'" not found', 'Window Error')
         sys.exit()
-'''def show(insert, FakeDisTitle, RealDisTitle, x, y, w, h):
-    def screen_refresh(x, y, w, h, WindowTitle, mode):
-        win32gui.SetWindowPos(
-            win32gui.FindWindow(None, WindowTitle), mode, 
-            x, y, w, h,
-            pygame.RESIZABLE|pygame.NOFRAME
-        )
-    if insert:
-        screen_refresh(x, y, w, h, RealDisTitle, win32con.HWND_NOTOPMOST)
-        screen_refresh(x, y, w, h, FakeDisTitle, win32con.HWND_TOPMOST)
+def run(MainUI, FakeDisTitle, RealDisTitle, core, insert, WindowUI):
+    MainUI = threading.Thread(target= MainUI.main, args= (WindowUI,))
+    def ModernUI(MainUI, FakeDisTitle, RealDisTitle, core, insert):
+        #------------modern ui-------------------
+        if win32gui.GetWindowText(win32gui.GetForegroundWindow()) == core.title:
+            MainUI.start()
+            core.edge.check(find(FakeDisTitle))
+            run = titlebar.process(core)
+            if not run: return False
+            try:
+                titlebar.draw(core)
+                if insert:
+                    find(RealDisTitle).moveTo(
+                        find(FakeDisTitle).left,
+                        find(FakeDisTitle).top
+                    )
+                MainUI.join()
+                pygame.display.update()
+            except: return False
+        return True
+        #----------------------------------------
     pygame.display.set_mode(
-        (
-            w, h
-        ),
+        find(FakeDisTitle).size,
         pygame.RESIZABLE|pygame.NOFRAME
     )
-def hide(insert, core, RealDisTitle, x, y, w, h):
-    def screen_refresh(x, y, w, h, WindowTitle, mode):
-        win32gui.SetWindowPos(
-            win32gui.FindWindow(None, WindowTitle), mode, 
-            x, y, w, h,
-            pygame.RESIZABLE|pygame.NOFRAME
-        )
-FakeDiscord    global 
-    if insert:
-        screen_refresh(x, y, w, h, RealDisTitle, win32con.HWND_TOPMOST)
-        screen_refresh(x, y, w, h, core.title, win32con.HWND_NOTOPMOST)'''
+    return ModernUI(MainUI, FakeDisTitle, RealDisTitle, core, insert)

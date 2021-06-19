@@ -7,15 +7,17 @@ def draw(core):
     core.button.minimize.draw()
     core.button.Discord.draw()
 def process(core):
-    draw(core)
+    def check():
+        if win32api.GetKeyState(0x01) in [-128, -127]:
+            return True
+        return False
     if core.edge.titlebar.change:
         return True
-    if core.button.close.check() and win32api.GetKeyState(0x01) in [-128, -127]:
-        pygame.display.quit()
+    if core.button.close.check() and check():
         return False
-    if core.button.maximize.check() and win32api.GetKeyState(0x01) in [-128, -127]:
+    elif core.button.maximize.check() and check():
         core.screen.maximize()
-    if core.button.minimize.check() and win32api.GetKeyState(0x01) in [-128, -127]:
+    elif core.button.minimize.check() and check():
         pygame.display.iconify()
     core.button.Discord.check()
     return True
