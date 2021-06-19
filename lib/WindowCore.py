@@ -1,5 +1,5 @@
 from lib import measure
-import pygame, win32api, pyautogui, multitasking
+import pygame, win32api, pyautogui
 
 class __button__:
     def __init__(self, x, y, image, imagex, Surface, P = 0):

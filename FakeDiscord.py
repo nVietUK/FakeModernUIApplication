@@ -29,8 +29,8 @@ except:
     os.system('notepad.exe '+ os.getcwd()+'/'+filename+'.txt')
     sys.exit()
 #----------------------------------------------------------------
-from lib import window, titlebar
-import pygame, win32gui, pygetwindow, keyboard, threading
+from lib import window
+import pygame, pygetwindow, keyboard
 #------------- file check -----------------------------------
 FileCheck.resource('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
 try:
