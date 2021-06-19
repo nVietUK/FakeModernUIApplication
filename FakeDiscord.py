@@ -36,7 +36,12 @@ FileCheck.resource('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplic
 try:
     import MyUI 
 except:
+    from lib import FileCheck
     WindowsBox.error('MyUI.py not found', 'Program Error')
+    FileCheck.existent(
+        settingfile.readline().split(' ', 2)[2].replace("\n", ''), 
+        cwd, 'image/Avatar/macosx.png https://github.com/nVietUK/FakeModernUIApplication/raw/main/image/Avatar/macosx.png'
+    )
     sys.exit()
 #------------------------------------------------------------
 #------------------ hide window------------------------------
