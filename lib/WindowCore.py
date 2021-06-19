@@ -178,4 +178,4 @@ class edge:
                 )
                 self.Wmouse = Nmouse
             return True
-        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+        if self.change_check(): pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)

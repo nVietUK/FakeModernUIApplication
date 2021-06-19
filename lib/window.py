@@ -21,11 +21,11 @@ def find(name):
         sys.exit()
 def run(MainUI, FakeDisTitle, RealDisTitle, core, insert, WindowUI):
     MainUI = threading.Thread(target= MainUI.main, args= (WindowUI,))
-    core.edge.check(find(FakeDisTitle))
     def ModernUI(MainUI, FakeDisTitle, RealDisTitle, core, insert):
         #------------modern ui-------------------
         if win32gui.GetWindowText(win32gui.GetForegroundWindow()) == core.title:
             MainUI.start()
+            core.edge.check(find(FakeDisTitle))
             run = titlebar.process(core)
             if not run: return False
             try:
