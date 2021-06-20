@@ -20,14 +20,13 @@ def find(name):
         WindowsBox.error('"'+ name+'" not found', 'Window Error')
         sys.exit()
 def run(MainUI, FakeDisTitle, RealDisTitle, core, insert, WindowUI):
-    MainUI = threading.Thread(target= MainUI.main, args= (WindowUI,))
     def ModernUI(MainUI, FakeDisTitle, RealDisTitle, core, insert):
         #------------modern ui-------------------
         if win32gui.GetWindowText(win32gui.GetForegroundWindow()) == core.title:
-            MainUI.start()
+            MainUI.shoot()
             core.edge.check(find(FakeDisTitle))
             run = titlebar.process(core)
-            if not run: return False
+            if not run: MainUI.shut(); return False
             try:
                 titlebar.draw(core)
                 if insert:
@@ -35,7 +34,7 @@ def run(MainUI, FakeDisTitle, RealDisTitle, core, insert, WindowUI):
                         find(FakeDisTitle).left,
                         find(FakeDisTitle).top
                     )
-                MainUI.join()
+                while MainUI.is_alive(): pass
                 pygame.display.update()
             except: return False
         return True

@@ -1,5 +1,3 @@
-from sys import path
-
 import multitasking
 from lib import WindowsBox
 import urllib.request, os

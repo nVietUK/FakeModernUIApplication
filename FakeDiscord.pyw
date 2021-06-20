@@ -1,4 +1,5 @@
 #------------WindowUI.txt check----------------------------------
+import threading
 from lib import DiscordImageSave, WindowsBox
 import os, sys
 filename = 'FakeDiscord'
@@ -29,7 +30,7 @@ except:
     os.system('notepad.exe '+ os.getcwd()+'/'+filename+'.txt')
     sys.exit()
 #----------------------------------------------------------------
-from lib import window, FileCheck
+from lib import window, FileCheck, ThreadBase
 import pygame, pygetwindow, keyboard
 #------------- file check -----------------------------------
 FileCheck.resource('https://raw.githubusercontent.com/nVietUK/FakeModernUIApplication/main/Request.file', os.getcwd())
@@ -67,11 +68,13 @@ WindowUI = pygame.display.set_mode(
 pygame.display.set_icon(
     pygame.image.load(
         os.getcwd() + "/image/DiscordIcon/app.ico"
-        )
     )
+)
 #--------------------------------------------------------
 core = window.window(FakeDisTitle, WindowUI)
 run = True
-obj = MyUI.MyUI()
+UI = MyUI.MyUI(WindowUI)
+thread_UI = ThreadBase.storage(UI.main)
+thread_UI.core.start()
 while run:
-    run = window.run(obj, FakeDisTitle, RealDisTitle, core, insert, WindowUI)
+    run = window.run(thread_UI.cmd, FakeDisTitle, RealDisTitle, core, insert, WindowUI)

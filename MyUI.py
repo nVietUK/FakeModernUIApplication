@@ -2,8 +2,9 @@ from lib import DiscordImageSave, FileCheck, WindowsBox
 import numpy, pygame, os, sys, pyaudio
 
 class MyUI:
-    def __init__(self) -> None:
+    def __init__(self, surface) -> None:
         filename = 'MyUI'
+        self.surface = surface
         try:
             self.mic = pyaudio.PyAudio().open(format=pyaudio.paInt16,channels=1,rate=44100,input=True,frames_per_buffer=2048, input_device_index=1)
         except:
@@ -44,7 +45,7 @@ class MyUI:
                 createfile.close()
                 os.system('notepad.exe '+ os.getcwd()+'/'+filename+'.txt')
                 sys.exit()
-    def main(self, surface):
+    def main(self):
         #---------------fake avatar--------------
             #---------------------- mic check -----------------------
         try:
@@ -62,7 +63,7 @@ class MyUI:
         ava_width = pygame.display.get_surface().get_size()[0] // 2 - 16
         ava_height= ava1.get_height()* (pygame.display.get_surface().get_size()[0] // 2 - 16) // ava1.get_width()
         try:
-            surface.blit(
+            self.surface.blit(
                 pygame.transform.scale(
                     ava1, (ava_width, ava_height)
                 ), 
@@ -74,7 +75,7 @@ class MyUI:
                     )
                 )
             )
-            surface.blit(
+            self.surface.blit(
                 pygame.transform.scale(
                     ava2, 
                     (ava_width, ava_height)
