@@ -106,13 +106,15 @@ class edge:
         self.titlebar = titlebar
         #--------------------------------------
         self.Wmouse = (0, 0)
-    def Window_Change():
-        pass # thêm phần thay đổi window
     def change_check(self):
+        print(self.top.change, self.left.change, self.right.change, self.bottom.change, self.titlebar.change)
         if not self.top.change and not self.bottom.change and not self.left.change and not self.right.change and not self.titlebar.change:
             return True
         return False
-    def check(self, Window):
+    def check(self, Window, *boolean):
+        for ck in boolean:
+            if not ck:
+                return True
         if self.top.check() and self.change_check() or self.top.change:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_SIZENS)
             if win32api.GetKeyState(0x01) in [-128, -127] and not self.top.change:
@@ -125,7 +127,6 @@ class edge:
                 Window.resizeTo(Window.size[0], Window.size[1] + (self.Wmouse - Nmouse))
                 Window.moveTo(Window.left, Window.top + (-1* (self.Wmouse - Nmouse)))
                 self.Wmouse = Nmouse
-            return True
         elif self.left.check() and self.change_check() or self.left.change:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_SIZEWE)
             if win32api.GetKeyState(0x01) in [-128, -127] and not self.left.change:
@@ -138,7 +139,6 @@ class edge:
                 Window.resizeTo(Window.size[0] + (self.Wmouse - Nmouse), Window.size[1])
                 Window.moveTo(Window.left + (-1* (self.Wmouse - Nmouse)), Window.top)
                 self.Wmouse = Nmouse  
-            return True
         elif self.right.check() and self.change_check() or self.right.change:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_SIZEWE)
             if win32api.GetKeyState(0x01) in [-128, -127] and not self.right.change:
@@ -150,7 +150,6 @@ class edge:
                 Nmouse = pyautogui.position()[0]
                 Window.resizeTo(Window.size[0] - (self.Wmouse - Nmouse), Window.size[1]) 
                 self.Wmouse = Nmouse
-            return True
         elif self.bottom.check() and self.change_check() or self.bottom.change:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_SIZENS)
             if win32api.GetKeyState(0x01) in [-128, -127] and not self.bottom.change:
@@ -162,7 +161,6 @@ class edge:
                 Nmouse = pyautogui.position()[1]
                 Window.resizeTo(Window.size[0], Window.size[1] + (Nmouse - self.Wmouse))
                 self.Wmouse = Nmouse
-            return True
         elif self.titlebar.check() and self.change_check() or self.titlebar.change:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
             if win32api.GetKeyState(0x01) in [-128, -127] and not self.titlebar.change:
@@ -177,5 +175,4 @@ class edge:
                     (-1* (self.Wmouse[1] - Nmouse[1]))
                 )
                 self.Wmouse = Nmouse
-            return True
         if self.change_check(): pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)

@@ -1,22 +1,21 @@
 class setup:
-    def __init__(self) -> None:
+    def __init__(self, trigger) -> None:
         self.run = True
-        self.trigger = False
+        self.trigger = trigger
         self.alive = False
     def shoot(self):
-        self.trigger = True
+        self.alive = True
     def is_alive(self):
         return self.alive
     def shut(self):
         self.run = False
-    def main(self, definition):
+    def main(self, definition, *arg):
         while self.run:
-            if self.trigger:
-                self.alive = True
-                definition()
-                self.trigger = False; self.alive = False
+            if self.trigger or self.alive:
+                definition(*arg)
+                self.alive = False
 import threading
 class storage:
-    def __init__(self, definition) -> None:
-        self.cmd = setup()
-        self.core = threading.Thread(target= self.cmd.main, args= (definition,))
+    def __init__(self, definition, trigger, *arg) -> None:
+        self.cmd = setup(trigger)
+        self.core = threading.Thread(target= self.cmd.main, args= (definition, *arg,))

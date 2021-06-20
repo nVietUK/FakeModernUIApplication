@@ -1,5 +1,4 @@
 #------------WindowUI.txt check----------------------------------
-import threading
 from lib import DiscordImageSave, WindowsBox
 import os, sys
 filename = 'FakeDiscord'
@@ -61,7 +60,7 @@ if insert:
 #----------------- pygame --------------------------------
 pygame.init()
 pygame.display.set_caption(FakeDisTitle)
-WindowUI = pygame.display.set_mode(
+Screen = pygame.display.set_mode(
     (530, 386),
     pygame.RESIZABLE|pygame.NOFRAME
 )
@@ -70,11 +69,27 @@ pygame.display.set_icon(
         os.getcwd() + "/image/DiscordIcon/app.ico"
     )
 )
+from lib import measure
+WindowUI = pygame.Surface(
+    (
+        measure.screen_wide(),
+        22
+    )
+)
+Interface = pygame.Surface(
+    (
+        measure.screen_wide(),
+        measure.screen_height() - 22
+    )
+)
 #--------------------------------------------------------
-core = window.window(FakeDisTitle, WindowUI)
+core = window.window(FakeDisTitle, WindowUI, Screen)
 run = True
-UI = MyUI.MyUI(WindowUI)
-thread_UI = ThreadBase.storage(UI.main)
+mUI = MyUI.MyUI(Interface)
+thread_UI = ThreadBase.storage(mUI.main, False)
 thread_UI.core.start()
+thread_edge = ThreadBase.storage(core.edge.check, True, window.find(FakeDisTitle))
+thread_edge.core.start()
 while run:
-    run = window.run(thread_UI.cmd, FakeDisTitle, RealDisTitle, core, insert, WindowUI)
+    run = window.run(thread_UI.cmd, thread_edge.cmd, FakeDisTitle, RealDisTitle, core, insert, WindowUI, mUI)
+thread_edge.cmd.shut()
